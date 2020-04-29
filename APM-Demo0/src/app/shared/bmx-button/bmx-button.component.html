@@ -1,0 +1,15 @@
+<span *ngIf="name">
+
+<button
+  [ngClass]=" { 
+    'btn': true,
+    'btn-primary': btnStyle === 'primary',
+    'btn-light': btnStyle === 'light'
+   }"
+  [type]="type"
+  [disabled]="disable"
+  style="width:80px"
+  (click)="clickEvent($event)">
+  {{name}}
+</button>
+</span>

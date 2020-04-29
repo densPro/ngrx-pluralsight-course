@@ -1,0 +1,107 @@
+<div class="card" *ngIf="product">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <form novalidate (ngSubmit)="saveProduct()" [formGroup]="productForm">
+      <fieldset>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="productNameId">Product Name</label>
+
+          <div class="col-md-9">
+            <input [ngClass]="{'is-invalid': displayMessage.productName }" 
+                   class="form-control" 
+                   id="productNameId" 
+                   type="text" 
+                   placeholder="Name (required)" 
+                   formControlName="productName" 
+                   (blur)="blur()" />
+            <span class="invalid-feedback" *ngIf="displayMessage.productName">
+              {{displayMessage.productName}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="productCodeId">Product Code</label>
+
+          <div class="col-md-9">
+            <input [ngClass]="{'is-invalid': displayMessage.productCode}" 
+                   class="form-control"
+                   id="productCodeId"
+                   type="text"
+                   placeholder="Code (required)"
+                   formControlName="productCode"
+                   (blur)="blur()" />
+            <span class="invalid-feedback" *ngIf="displayMessage.productCode">
+              {{displayMessage.productCode}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="starRatingId">Star Rating (1-5)</label>
+
+          <div class="col-md-9">
+            <input [ngClass]="{'is-invalid': displayMessage.starRating}"
+                   class="form-control" 
+                   id="starRatingId" 
+                   type="text" 
+                   placeholder="Rating" 
+                   formControlName="starRating" />
+            <span class="invalid-feedback" *ngIf="displayMessage.starRating">
+              {{displayMessage.starRating}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="descriptionId">Description</label>
+
+          <div class="col-md-9">
+            <textarea [ngClass]="{'is-invalid': displayMessage.description}"
+                      class="form-control" 
+                      id="descriptionId" 
+                      placeholder="Description" 
+                      rows=3 
+                      formControlName="description">
+            </textarea>
+            <span class="invalid-feedback" *ngIf="displayMessage.description">
+              {{ displayMessage.description}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-10 col-md-offset-2">
+            <span>
+              <pm-bmx-button
+                name="Save"
+                type="submit"
+                btnStyle="primary"
+                [disable]="!productForm.valid || !productForm.dirty"
+              ></pm-bmx-button>
+            </span>
+            <span>
+              <pm-bmx-button
+                name="Cancel"
+                (clickEventEmitter)="cancelEdit()"
+              ></pm-bmx-button>
+            </span>
+            <span>
+              <pm-bmx-button
+                name="Delete"
+                btnStyle="light"
+                type="button"
+                (clickEventEmitter)="deleteProduct()"
+              ></pm-bmx-button>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>
