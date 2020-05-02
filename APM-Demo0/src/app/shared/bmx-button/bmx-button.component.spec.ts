@@ -10,16 +10,25 @@ describe('BmxButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ BmxButtonComponent ]
     })
-    .compileComponents();
+    .compileComponents()
+    .then(() => {
+      fixture = TestBed.createComponent(BmxButtonComponent);
+      component = fixture.componentInstance;
+    });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BmxButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit on click', () => {
+    // spy on event emitter
+    spyOn(component.clickEventEmitter, 'emit');
+
+    component.clickEvent(new MouseEvent(''));
+
+    fixture.detectChanges();
+
+    expect(component.clickEventEmitter.emit).toHaveBeenCalled();
   });
 });
