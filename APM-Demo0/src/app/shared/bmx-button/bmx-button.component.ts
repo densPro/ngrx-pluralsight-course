@@ -15,9 +15,7 @@ export class BmxButtonComponent implements OnInit {
   @Output() clickEventEmitter = new EventEmitter<MouseEvent>();
   constructor() { }
 
-  ngOnInit() {
-    console.log(name);
-  }
+  ngOnInit() {  }
 
   clickEvent(event: MouseEvent) {
     this.clickEventEmitter.emit(event);
